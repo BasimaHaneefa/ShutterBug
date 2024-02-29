@@ -1,0 +1,58 @@
+{% extends 'User/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Add Gallery</h3></title>
+</head>
+<body>
+    <h2 style="text-align: center;">VIEW MY PHOTOGRAPHER BOOKING</h2>
+    <form name="frmCal" method="GET">
+        {% csrf_token %}
+        <table border="1" align="center" >
+            <tr>
+                <th>Sl.No</th>
+                <th>Photographer name</th>
+                <th>Category</th>
+                <th>Photo</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>For Date</th>
+                <th>Description</th>
+                <th>Booked Date</th>
+                <th>Status</th>
+
+                
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.photographer.photographer_name}}</td>
+                <td>{{i.photographer.pcat.pcat_name}}</td>
+                <td><img src="{{i.photographer.photographer_photo.url}}" width="100" height="100"></td>
+                <td>{{i.photographer.photographer_contact}}</td>
+                <td>{{i.photographer.photographer_email}}</td>
+                <td>{{i.booking_date}}</td>
+                <td>{{i.booking_description}}</td>
+                <td>{{i.booked_date}}</td>
+                <td>{% if i.booking_vstatus == '0' %}
+                    Not Confirmed
+                    {% elif i.booking_vstatus == '1' %}
+                    Confirmed | <a href="{% url 'User:chatpage' i.id %} ">Chat</a>
+                    {% else %}
+                    Rejected
+                    {% endif %}</td>
+                 
+                
+            </tr>
+            {% endfor %}
+        
+        </table>
+        
+        
+        </body>
+                </html>     
+        {% endblock content %}

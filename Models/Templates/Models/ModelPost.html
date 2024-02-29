@@ -1,0 +1,63 @@
+{% extends 'Models/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Model Post</h3></title>
+</head>
+<body>
+    <form name="frmCal" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1" align="center" >
+            <tr>
+                <td>Image</td>
+                <td>
+                    <input type="file" name="img">
+                </td>
+            </tr>  
+
+            <tr>
+                <td>Caption</td>
+                <td><textarea name="txtcaption" required></textarea></td>
+            </tr>
+
+            <tr>
+
+                <tr>
+                
+                    <td colspan="2" align="center">
+                        <input type="submit" name="btnsubmit" value="Save">
+                        <input type="reset" name="btncancel" value="Cancel">
+                    
+                    </td>
+                </tr>
+            </table>
+        </form>
+    
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>Image</th>
+                <th>Caption</th>
+                <th>Action</th>
+                
+            </tr>
+            {% for i in post %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.post_image.url}}" width="150" height="150"></td>
+                <td>{{i.post_caption}}</td>
+                 <td><a href="{% url 'Models:Deletemodelpost' i.id %}">Delete</a></td>
+                
+            </tr>
+            {% endfor %}
+        
+        </table>
+        
+        
+        </body>
+                </html>
+    {% endblock content %}

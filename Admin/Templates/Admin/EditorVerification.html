@@ -1,0 +1,58 @@
+{% extends 'Admin/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Editor Verification</h3></title>
+</head>
+<body>
+    <h2 style="text-align: center;">EDITOR VERIFICATION</h2>
+    <form name="frmCal" method="GET">
+        {% csrf_token %}
+        <table border="1" align="center" >
+            <tr>
+                <th>Sl.No</th>
+                <th>Editor name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Photo</th>
+                <th>Proof</th>
+                <th>Category</th>
+                <th>District</th>
+                <th>Place</th>
+                <th>Action</th>
+
+                
+            </tr>
+            {% for i in new %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.editor_name}}</td>
+                <td>{{i.editor_email}}</td>
+                <td>{{i.editor_contact}}</td>
+                <td>{{i.editor_address}}</td>
+                <td>{{i.editor_gender}}</td>
+                <td><img src="{{i.editor_photo.url}}" width="100" height="100"></td>
+                <td><a href="{{i.editor_proof.url}}" download>View</a></td>
+                <td>{{i.ecat.ecat_name}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                 <td>{{i.place.place_name}}</td>
+                 <td><a href="{% url 'Admin:eaccept' i.id %}">Accept</a>|
+                    <a href="{% url 'Admin:ereject' i.id %}">Reject</a></td>
+                
+                 
+                
+            </tr>
+            {% endfor %}
+        
+        </table>
+        
+        
+        </body>
+                </html>     
+        {% endblock content %}

@@ -1,0 +1,131 @@
+{% extends 'Guest/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h3 align="center">Photographer Registration</h3>
+    <form name="frmCal" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtname" placeholder="Enter Name" required></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="number" name="txtcontact" placeholder="Enter Contact" required></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txtemail" placeholder="Enter Email" required></td>
+            </tr>
+            <tr>
+                    <td>Address</td>
+                    <td>
+                        <textarea name="txtaddress" id="" cols="30" rows="10"></textarea>
+                    </td>
+            </tr>
+            
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="male" required>Male
+                    <input type="radio" name="gender" value="female" required>Female
+                    <input type="radio" name="gender" value="other" required> Other
+                     
+                </td>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select name="sel_cat" id="sel_cat">
+                        <option value="">Select category</option>
+                        {% for i in cat %}
+                        <option value="{{i.id}}">{{i.pcat_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>  
+                </tr>    
+
+                <tr>
+                    <td>District</td>
+                    <td>
+                        <select name="sel_dist" id="sel_dist">
+                        <option value="">Select District</option>
+                        {% for i in dist %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>  
+                </tr>    
+                
+                <tr>
+                    <td>Place</td>
+                    <td>
+                        <select name="sel_place" id="sel_place">
+                        <option value="">Select Place</option>
+                        </select> 
+                    </td>    
+
+                <tr>
+                    <td>Photo</td>
+                    <td>
+                        <input type="file" name="photo">
+                    </td>
+                </tr>    
+
+                <tr>
+                    <td>Proof</td>
+                    <td>
+                        <input type="file" name="proof">
+                    </td>
+                </tr>    
+
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="photographerpwd" placeholder="Enter Password" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="cphotographerpwd" placeholder="Enter Password" required>
+                    </td>
+                </tr>
+
+            <tr></tr>
+
+                <td colspan="2" align="center">
+                <input type="submit" name="btnregister" value="Register">
+                <input type="reset" name="reset" value="Cancel">
+            
+            
+            </td>
+        </tr>
+       
+    </table>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_dist").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:Ajaxplace' %}";
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#sel_place").html(data);
+            },
+        });
+    });
+</script>
+
+
+</body>
+        </html>
+{% endblock content %}

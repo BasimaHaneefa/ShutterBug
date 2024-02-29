@@ -1,0 +1,51 @@
+{% extends 'Photographers/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Add Gallery</h3></title>
+</head>
+<body>
+    <h2 style="text-align: center;">VIEW REJECTED USER BOOKING</h2>
+    <form name="frmCal" method="GET">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>User name</th>
+                <th>User Email</th>
+                <th>Contact</th>
+                <th>Booked Date</th>
+                <th>For Booking</th>
+                <th>Description</th>
+                <th>Action</th>
+                
+
+                
+            </tr>
+            {% for i in rej %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.user.user_name}}</td>
+                <td>{{i.user.user_email}}</td>
+                <td>{{i.user.user_contact}}</td>
+                <td>{{i.booked_date}}</td>
+                <td>{{i.booking_date}}</td>
+                <td>{{i.booking_description}}</td>
+                <td><a href="{% url 'Photographers:accept' i.id  %}">Accept</a>
+                    
+                    </td>
+                 
+                
+            </tr>
+            {% endfor %}
+        
+        </table>
+        
+        
+        </body>
+                </html>     
+        {% endblock content %}

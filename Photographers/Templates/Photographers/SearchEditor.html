@@ -1,0 +1,90 @@
+{% extends 'Photographers/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Editor</title>
+    <style>
+        .card {
+            width: calc(25% - 20px); /* Adjust the width as needed */
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: top;
+            box-sizing: border-box;
+        }
+
+        .card img {
+            width: 50%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .card-content {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">SEARCH EDITOR</h2>
+    <form name="frmCal" method="POST">
+        {% csrf_token %} 
+
+        <table border="1" align="center">
+            <tr>
+                <td>Editor Category</td>
+                <td>
+                    <select name="sel_cat" id="sel_cat">
+                        <option value="">Select </option>
+                        {% for i in cat %}
+                            <option value="{{i.id}}">{{i.ecat_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form> 
+    <br>
+    <div style="text-align: center;">
+        <div id="result">
+        {% for i in editor %}
+            <div class="card">
+                <img src="{{i.editor_photo.url}}" alt="{{i.editor_name}}">
+                <div class="card-content">
+                    <p>{{i.editor_name}}</p>
+                    <p>{{i.editor_email}}</p>
+                    <p>{{i.editor_contact}}</p>
+                    <p>{{i.editor_address}}</p>
+                    <div style="text-align: center;">
+                        <button><a href="{% url 'Photographers:EditorBooking' i.id %}">Book</a></button>
+                        <button><a href="{% url 'Photographers:Viewmore' i.id %}">View Works</a></button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_cat").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Photographers:Ajaxeditorsearch' %}";
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+    });
+</script>
+
+</html>
+{% endblock content %}

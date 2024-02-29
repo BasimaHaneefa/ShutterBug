@@ -1,0 +1,55 @@
+{% extends 'Admin/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Photographer Verification</h3></title>
+</head>
+<body>
+    <h2 style="text-align: center;">REJECTED PHOTOGRAPHER </h2>
+    <form name="frmCal" method="GET">
+        {% csrf_token %}
+        <table border="1" align="center" >
+            <tr>
+                <th>Sl.No</th>
+                <th>Photographer name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Photo</th>
+                <th>Proof</th>
+                <th>Gender</th>
+                <th>Category</th>
+                <th>District</th>
+                <th>Place</th>
+                <th>Action</th>
+
+                
+            </tr>
+            {% for i in rej %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.photographer_name}}</td>
+                <td>{{i.photographer_email}}</td>
+                <td>{{i.photographer_contact}}</td>
+                <td>{{i.photographer_address}}</td>
+                <td><img src="{{i.photographer_photo.url}}" width="100" height="100"></td>
+                <td><a href="{{i.photographer_proof.url}}" download>View</a></td>
+                <td>{{i.photographer_gender}}</td>
+                <td>{{i.pcat.pcat_name}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                 <td>{{i.place.place_name}}</td>
+                 <td><a href="{% url 'Admin:accept' i.id %}">Accept</a></td>
+                
+            </tr>
+            {% endfor %}
+        
+        </table>
+        
+        
+        </body>
+                </html>     
+        {% endblock content %}

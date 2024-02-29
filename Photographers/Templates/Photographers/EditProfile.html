@@ -1,0 +1,53 @@
+{% extends 'Photographers/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Edit Profile</h3></title>
+</head>
+<body>
+    <h3 align="center">Edit Profile</h3>
+    <form name="frmCal" method="POST">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtphotographername" placeholder="Enter Name"  value="{{profile.photographer_name}}"></td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txtphotographertemail" placeholder="Enter Email" value="{{profile.photographer_email}}" ></td>
+            </tr>
+
+            <tr>
+                <td>Contact</td>
+                <td><input type="number" name="txtphotographercontact" placeholder="Enter Contact" value="{{profile.photographer_contact}}" ></td>
+            </tr>
+
+            <tr>
+                    <td>Address</td>
+                    <td>
+                        <textarea name="txtphotographeraddress" id="" cols="30" rows="10">{{profile.photographer_address}}</textarea>
+                    </td>
+            </tr>
+            <tr>
+
+                <td colspan="2" align="center">
+                <input type="submit" name="btnedit" value="Edit">
+            
+            
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    
+    
+    
+    </body>
+            </html>
+    {% endblock content %}

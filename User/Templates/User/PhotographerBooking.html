@@ -1,0 +1,40 @@
+{% extends 'User/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer Booking</title>
+</head>
+<body>
+    <form name="frmCal" method="POST">
+        {% csrf_token %} 
+
+        <table border="1" align="center">
+            <tr>
+                <td>For Date</td>
+                <td><input type="date" name="date" placeholder="Enter Date" required></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <textarea name="txtdescription" id="" cols="30" rows="10">
+                    
+                    </textarea></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btnsubmit" value="Cancel">
+                
+                </td>
+            </tr>
+           
+        </table>
+        </form>
+    </body>
+    </html>
+    {% endblock content %}

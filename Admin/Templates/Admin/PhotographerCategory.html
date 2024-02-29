@@ -1,0 +1,53 @@
+{% extends 'Admin/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+    <form name="frmCal" method="POST">
+        {% csrf_token %} 
+
+        <table>
+            <tr>
+                <td>Category</td>
+                <td><input type="text" name="txtcategory" placeholder="Enter Category" value="{{edis.pcat_name}}"" required></td>
+            </tr>
+           
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="submit">
+                
+                </td>
+            </tr>
+           
+        </table>
+
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>Category</th>
+                <th>Action</th>
+                
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.pcat_name}}</td>
+                <td><a href="{% url 'Admin:deletecategory' i.id %}">Delete</a>
+                    <a href="{% url 'Admin:editcategory' i.id %}">Edit</a></td>
+                
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </form>
+</body>
+</html>
+{% endblock content %}

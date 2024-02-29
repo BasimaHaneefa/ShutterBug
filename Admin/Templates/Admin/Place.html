@@ -1,0 +1,64 @@
+{% extends 'Admin/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head> 
+<body>
+    <form name="frmCal" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>District</td>
+                <td>
+                    <select name="sel_dist" id="">
+                    <option value="">Select District</option>
+                    {% for i in district %}
+                    <option value="{{i.id}}"  {% if i.id == edis.district.id %} selected{% endif %}>{{i.district_name}}</option>
+                    {% endfor %}
+                    </select>
+                </td>  
+           
+            <tr>
+                <td>Place</td>
+                <td><input type="text" name="txtplace" placeholder="Enter Place" value="{{edis.place_name}}" required></td>
+            </tr>
+           
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="submit">
+                
+                </td>
+            </tr>
+           
+        </table>
+
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>District</th>
+                <th>Place</th>
+                <th>Action</th>
+                
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.district.district_name}}   </td>
+                <td>{{i.place_name}}   </td>
+                <td><a href="{% url 'Admin:deleteplace' i.id %}">Delete</a>
+                    <a href="{% url 'Admin:editplace' i.id %}">Edit</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </form>
+</body>
+</html>
+{% endblock content %}

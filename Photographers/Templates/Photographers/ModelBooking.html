@@ -1,0 +1,41 @@
+{% extends 'Photographers/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Booking</title>
+</head>
+<body>
+    <h2 style="text-align: center;">MODEL BOOKING</h2>
+    <form name="frmCal" method="POST">
+        {% csrf_token %} 
+<center>
+        <table>
+            <tr>
+                <td>For Date</td>
+                <td><input type="date" name="date" placeholder="Enter Date" required></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <textarea name="txtdescription" id="" cols="30" rows="10">
+                    
+                    </textarea></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btnsubmit" value="Cancel">
+                
+                </td>
+            </tr>
+          </center> 
+        </table>
+        </form>
+    </body>
+    </html>
+    {% endblock content %}

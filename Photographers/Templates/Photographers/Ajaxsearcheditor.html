@@ -1,0 +1,15 @@
+{% for i in editor %}
+            <div class="card">
+                <img src="{{i.editor_photo.url}}" alt="{{i.editor_name}}">
+                <div class="card-content">
+                    <p>{{i.editor_name}}</p>
+                    <p>{{i.editor_email}}</p>
+                    <p>{{i.editor_contact}}</p>
+                    <p>{{i.editor_address}}</p>
+                    <div style="text-align: center;">
+                        <button><a href="{% url 'Photographers:EditorBooking' i.id %}">Book</a></button>
+                        <button><a href="{% url 'Photographers:Viewmore' i.id %}">View Works</a></button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}

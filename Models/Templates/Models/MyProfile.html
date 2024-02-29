@@ -1,0 +1,37 @@
+{% extends 'Models/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile</title>
+</head>
+<body>   
+    <h1 align="center">MyProfile</h1>
+<table border="1" align="center">
+    <tr>
+        <td colspan="2" align="center"><img src="{{profile.model_photo.url}}" width="150" height="150" style="border-radius: 50%;"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td>{{profile.model_name}}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{profile.model_email}}</td>
+    </tr>
+    <tr>
+        <td>Contact</td>
+        <td>{{profile.model_contact}}</td>
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td>{{profile.model_address}}</td>
+    </tr>
+
+    </table>
+    </body>
+    </html>
+    {% endblock content %}

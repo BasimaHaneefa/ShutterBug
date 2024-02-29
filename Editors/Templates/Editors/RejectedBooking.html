@@ -1,0 +1,54 @@
+{% extends 'Editors/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Rejected Booking</h3></title>
+</head>
+<body>
+    <h2 style="text-align: center;">REJECTING BOOKING</h2>
+    <form name="frmCal" method="GET">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>Photographer name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Photo</th>
+                
+                <th>For Date</th>
+                <th>Description</th>
+                <th>Booked Date</th>
+                <th>Action</th>
+
+                
+            </tr>
+            {% for i in rej %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.photographer.photographer_name}}</td>
+                <td>{{i.photographer.photographer_email}}</td>
+                <td>{{i.photographer.photographer_contact}}</td>
+                <td><img src="{{i.photographer.photographer_photo.url}}" width="150" height="150"></td>
+                <td>{{i.photographer.photographer_address}}</td>
+                <td>{{i.booking_date}}</td>
+                <td>{{i.mbooking_discription}}</td>
+                <td>{{i.booked_date}}</td>
+                <td><a href="{% url 'Editors:accept' i.id  %}">Accept</a>
+                    </td>
+
+                 
+                
+            </tr>
+            {% endfor %}
+        
+        </table>
+        
+        
+        </body>
+                </html>     
+        {% endblock content %}

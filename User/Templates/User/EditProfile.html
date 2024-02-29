@@ -1,0 +1,53 @@
+{% extends 'User/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h3>Edit Profile</h3></title>
+</head>
+<body>
+    <h3 align="center">Edit Profile</h3>
+    <form name="frmCal" method="POST">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtusername" placeholder="Enter Name"  value="{{profile.user_name}}"></td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txtusertemail" placeholder="Enter Email" value="{{profile.user_email}}" ></td>
+            </tr>
+
+            <tr>
+                <td>Contact</td>
+                <td><input type="number" name="txtusercontact" placeholder="Enter Contact" value="{{profile.user_contact}}" ></td>
+            </tr>
+
+            <tr>
+                    <td>Address</td>
+                    <td>
+                        <textarea name="txtuseraddress" id="" cols="30" rows="10">{{profile.user_address}}</textarea>
+                    </td>
+            </tr>
+            <tr>
+
+                <td colspan="2" align="center">
+                <input type="submit" name="btnedit" value="Edit">
+            
+            
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    
+    
+    
+    </body>
+            </html>
+    {% endblock content %}

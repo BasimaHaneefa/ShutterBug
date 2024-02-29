@@ -1,0 +1,55 @@
+{% extends 'Admin/Head.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District</title>
+</head>
+<body>
+    <h2 align="center">District</h2>
+    <form name="frmCal" method="POST">
+        {% csrf_token %} 
+
+        <table border="1" align="center">
+            <tr>
+                <td>District</td>
+                <td><input type="text" name="txtdistrict" placeholder="Enter District" value="{{edis.district_name}}" required></td>
+            </tr>
+           
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="submit">
+                
+                </td>
+            </tr>
+           
+        </table>
+<br><br>
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>District</th>
+                <th>Action</th>
+                
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.district_name}}</td>
+                <td><a href="{% url 'Admin:deletedistrict' i.id %}">Delete</a>
+                    <a href="{% url 'Admin:editdistrict' i.id %}">Edit</a></td>
+    
+                
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </form>
+</body>
+</html>
+{% endblock content %}
